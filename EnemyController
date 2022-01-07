@@ -17,7 +17,6 @@ public class enemyController : MonoBehaviour {
     public static float enemyHealth;
    
     void Start () {
-        enemyHealth = 100;
         UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.destination = goal.position;
  
@@ -26,25 +25,21 @@ public class enemyController : MonoBehaviour {
     }
    
     void Update () {
-        Debug.Log(enemyHealth);
-       
-        if(enemyHealth <=0)
-        Destroy(gameObject);
-           
        
         playerDistance = Vector3.Distance (player.position, transform.position);
- 
-        if (playerDistance < awareAI)
+
+                if (playerDistance < awareAI)
         {
             LookAtPlayer();
-            Debug.Log("Seen");
+        
         }
  
+       
         if (playerDistance < awareAI)
         {
-            if (playerDistance < 2f)
+            if (playerDistance < 10f)
             {
-            Chase();
+            agent.SetDestination(player.transform.position);
             }
                 else
             GotoNextPoint();      
@@ -78,4 +73,3 @@ public class enemyController : MonoBehaviour {
  
  
     }
- 
